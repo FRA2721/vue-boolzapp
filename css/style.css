@@ -1,8 +1,64 @@
-/* dev: Francesco Cimino; */
-/* proj: Boolzapp; */
-/* lang: css; */
+/* reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* debug */
-body{
+
+
+/* html */
+html{
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+/* root */
+:root{
+    --ms_bg-app: linear-gradient(180deg, #009688 20%, #D8DBD6 20%);
+}
+
+
+
+/* root-main-structure-layout */
+#root{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--ms_bg-app);
+}
+
+
+
+/* container-formatting-section */
+.container{
+    width: 90%;
+    max-width: 1200px;
+    min-width: 800px;
+    height: 90vh;
+    display: flex;
+    border: 1px solid black;
+}
+
+
+
+/* sidebar */
+.sidebar{
+    width: 25%;
+    height: 100%;
     background-color: red;
+}
+
+
+
+/* chats-formatting-section */
+.chats-wrapper{
+    width: 75%;
+    height: 100%;
+    background-color: green;
 }

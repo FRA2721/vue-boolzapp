@@ -1,44 +1,64 @@
-<!-- dev: Francesco Cimino;  -->
+<!-- dev: Francesco Cimino; -->
 <!-- proj: Boolzapp; -->
 <!-- lang: html; -->
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- head -->
 <head>
-
-    <!-- meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- /meta -->
 
     <!-- links-section -->
+
         <!-- css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- /css -->
 
         <!-- vue -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.global.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <!-- /vue -->
+
+        <!-- luxon -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- /luxon -->
+
+        <!-- font-awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- /font-awesome -->
+
     <!-- /links-section -->
 
     <!-- title -->
-    <title>Boolzapp</title>
+    <title>Boolzap</title>
     <!-- /title -->
-
 </head>
-<!-- /head -->
 
-<!-- body -->
 <body>
     
+    <!-- root -->
+    <div id="root">
+
+        <!-- container -->
+        <div class="container">
+
+            <!-- sidebar -->
+            <div class="sidebar"></div>
+            <!-- /sidebar -->
+
+            <!-- chats-wrapper -->
+            <div class="chats-wrapper"></div>
+            <!-- chats-wrapper -->
+
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /root -->
+
     <!-- js -->
     <script src="js/script.js"></script>
     <!-- /js -->
 
 </body>
-<!-- /body -->
-
 </html>
