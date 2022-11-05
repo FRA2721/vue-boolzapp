@@ -96,7 +96,33 @@
                 <!-- /header-sidebar -->
 
                 <!-- main-structure-for-sidebar -->
-                <div class="main-sidebar-structure "></div>
+                <div class="main-sidebar-structure ">
+                     
+                    <!-- users-chat-list -->
+                    <ul class="chat-list">
+
+                        <li 
+                        class="chat-item" 
+                        :class="{'active' : currentChat === index}" 
+                        v-for="(contact, index) in dataForUsers"
+                        @click="currentChat = index"
+                        >
+                            <div class="user-photo">
+                                <img :src="`img/avatar${contact.avatar}.jpg`" :alt="`photo of ${contact.name}`">
+                            </div>
+
+                            <div class="info-chat">
+                                <h3>{{ contact.name }}</h3>
+                                <p>{{ contact.messages[contact.messages.length - 1].message }}</p>
+                                <p id="last-hour">{{ contact.messages[contact.messages.length - 1].date }}</p>
+                            </div>
+
+                        </li>
+                        <!-- Chat Item -->
+                    </ul>
+                    <!-- users-chat-list -->
+
+                </div>
                 <!-- main-structure-for-sidebar -->
 
             </div>
