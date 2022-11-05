@@ -1,3 +1,7 @@
+/* dev: Francesco Cimino; */
+/* proj: Boolzapp; */
+/* lang: css; */
+
 /* reset */
 *{
     margin: 0;
@@ -15,9 +19,29 @@ html{
 
 
 
+/* img-formatting-section */
+img{
+    max-width: 100%;
+}
+
+
+
+/* list-formatting-section */
+ul{
+    list-style: none;
+}
+
+
+
 /* root */
 :root{
     --ms_bg-app: linear-gradient(180deg, #009688 20%, #D8DBD6 20%);
+    --ms-light-grey: #eaeaea;
+    --ms-grey: #b1b1b1;
+    --ms-light-blue: #8edafc;
+    --sidebar-wrapper-width: 35%;
+    --sidebar-header-height: 150px;
+    --chats-wrapper-width: calc( 100% - var(--sidebar-wrapper-width));
 }
 
 
@@ -37,19 +61,165 @@ html{
 
 /* container-formatting-section */
 .container{
+    border: 1px solid black;
     width: 90%;
     max-width: 1200px;
     min-width: 800px;
     height: 90vh;
     display: flex;
+}
+
+
+
+/* header-sidebar-formatting-section */
+.header-sidebar{
+    width: 100%;
+    height: var(--sidebar-header-height);
+}
+
+
+
+/* users-info-formatting-section */
+.header-sidebar .users-info{
+    width: 100%;
+    height: calc(100% / 3);
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    background-color: var(--ms-light-grey);
+}
+
+.users-info .user{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.users-info .user img{
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: .5em;
+}
+
+.users-info .user h2{
+    font-size: .8rem;
+}
+
+.users-info .icons{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.users-info .icons li{
+    font-size: 1rem;
+    margin: 0 .5em;
+    color: var(--ms-grey);
+    cursor: pointer;
+}
+
+
+
+/* bnr-formatting-section */
+.header-sidebar .bnr-notification{
+    width: 100%;
+    height: calc(100% / 3);
+    padding: .5em .8em;
+    display: flex;
+    align-items: center;
+    background-color: var(--ms-light-blue);
+}
+
+.bnr-notification .icon{
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--ms-light-blue);
+}
+
+.bnr-notification .bnr-description{
+    width: calc(100% - 33px);
+    margin-left: 1em;
+}
+
+.bnr-description h3{
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.bnr-description a{
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: .8rem;
+    color: #6684a8;
+}
+
+
+
+
+/* search-bar-formatting-section */
+.header-sidebar .search-bar{
+    width: 100%;
+    height: calc(100% / 3);
+    padding: .5em;
+    background-color: var(--ms-light-grey);
+    position: relative;
+}
+
+.search-bar label{
+    display: none;
+}
+
+.search-bar input{
+    width: 100%;
+    height: 100%;
+    padding-left: 55px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.header-sidebar .search-bar::before{
+    content: ' ';
+    display: block;
+    width: 50px;
+    height: 100%;
+    border-right: 1px solid var(--ms-light-grey);
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    line-height: 33px;
+    font-size: 1rem;
+    top: 0;
+    left: 0;
+}
+
+.search-bar input:focus-visible{
+    outline: none;
+}
+
+
+
+/* .main-sidebar-structure */
+.main-sidebar-structure{
     border: 1px solid black;
+    width: 100%;
+    height: calc(100% - var(--sidebar-header-height));
+    overflow-y: scroll;
 }
 
 
 
 /* sidebar */
 .sidebar{
-    width: 25%;
+    width: var(--sidebar-wrapper-width);
     height: 100%;
     background-color: red;
 }
@@ -58,7 +228,7 @@ html{
 
 /* chats-formatting-section */
 .chats-wrapper{
-    width: 75%;
+    width: var(--chats-wrapper-width);
     height: 100%;
     background-color: green;
 }
