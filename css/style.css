@@ -78,7 +78,7 @@ label{
     --sidebar-wrapper-width: 35%;
     --sidebar-header-height: 150px;
     --width-heigth-user-photo: 35px;
-    --ms-box-shadow-black: 3px 3px 33px 9px rgba(0,0,0,0.63);
+    --ms-box-shadow-black: 3px 3px 33px 9px rgba(0,0,0,0.5);
     --wrapper-chat-section-width: calc( 100% - var(--sidebar-wrapper-width));
 }
 
