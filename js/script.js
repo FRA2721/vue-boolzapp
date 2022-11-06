@@ -192,6 +192,8 @@ createApp({
                     ]
                 }
             ],
+
+            // automatic-random-messages
             botMessage: [
                 "Hi mate... nice to se you",
                 "How are you?",
@@ -239,6 +241,7 @@ createApp({
             }
         },
 
+        // -messagebot-generation
         newBotMessage(){
             const rndMessage = this.botMessage[this.getRndNum(0,this.botMessage.length - 1)];
             const botMessage = {
@@ -278,6 +281,7 @@ createApp({
             return rndNum;
         },
 
+        // user-can-delete-all-messages
         deleteAllMessage(){
             if(this.contacts.length > 0){
                 if(this.contacts[this.currentChat].messages.length > 0){
@@ -288,6 +292,7 @@ createApp({
             }
         },
 
+        // user-can-delete-chat
         deleteChat(){
             if(this.currentChat === this.contacts.length - 1 && this.currentChat !== 0){
                 this.contacts.splice(this.currentChat, 1);
@@ -363,6 +368,8 @@ createApp({
                 }
             }
         },
+
+        // user-can-change-theme-mode
         switchMode(){
             this.darkTheme = !this.darkTheme;
             this.root = document.documentElement;

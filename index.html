@@ -43,6 +43,7 @@
             <div class="sidebar">
                 <div class="header-sidebar">
 
+                    <!-- user-info-section -->
                     <div class="user-info">
 
                         <div class="user">
@@ -69,7 +70,7 @@
                         </ul>
 
                     </div>
-                    <!-- /user-info -->
+                    <!-- /user-info-section -->
 
                     <!-- banner-section -->
                     <div class="bnr-notification">
@@ -95,6 +96,7 @@
 
                 </div>
 
+                <!-- main-sidebar-structure-section -->
                 <div class="main-sidebar-structure">
                     <ul class="users-chat-list">
 
@@ -125,13 +127,16 @@
 
                     </ul>
                 </div>
+                <!-- /main-sidebar-structure-section -->
 
+                <!-- footer-sidebar-section -->
                 <div class="sidebar-footer-section">
 
                     <button id="add-chat" @click="openPopup = true">
                         <i class="fa-solid fa-plus"></i>
                     </button>
 
+                    <!-- new-user-chat-section -->
                     <div id="popup-add" v-if="openPopup">
                         <button class="close" @click="closePopupAdd()"><i class="fa-solid fa-xmark"></i></button>
 
@@ -145,7 +150,11 @@
 
                         <button class="add" @click="newChat()">Add new one</button>
                     </div>
+                    <!-- /new-user-chat-section -->
+
                 </div>
+                <!-- /footer-sidebar-section -->
+
             </div>
             <!-- sidebar-section -->
 
@@ -180,6 +189,7 @@
 
                 </div>
 
+                <!-- dropdown-menu-for-message-option -->
                 <div class="main-chat">
                     <ul class="message-list" v-if="contacts.length > 0">
 
@@ -203,6 +213,7 @@
                         </li>
                     </ul>
                 </div>
+                <!-- /dropdown-menu-for-message-option -->
 
                 <div class="footer-chat">
 
@@ -210,6 +221,7 @@
                         <i class="fa-regular fa-face-smile"></i>
                     </div>
 
+                    <!-- new-mwssage-section -->
                     <div class="user-message-input">
                         <label for="user-message">Write a new message...</label>
                         <input 
@@ -220,7 +232,9 @@
                         @keyup.enter="newUserMessage"
                         >
                     </div>
+                    <!-- /new-message-section -->
 
+                    <!-- plane-microphone-icons -->
                     <div 
                     class="icon"
                     v-if="userMessage.length > 0"
@@ -231,6 +245,7 @@
                     <div class="icon" v-else>
                         <i class="fa-solid fa-microphone"></i>
                     </div>
+                    <!-- /plane-microphone-icons -->
                 </div>
             </div>
             <!-- /chat-section -->
