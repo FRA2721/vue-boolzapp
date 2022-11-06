@@ -363,5 +363,29 @@ createApp({
                 }
             }
         },
+        switchMode(){
+            this.darkTheme = !this.darkTheme;
+            this.root = document.documentElement;
+            if(!this.darkTheme){
+                // light-mode
+                this.root.style.setProperty("--ms_bg-app", "linear-gradient(180deg, #009688 18.8%, #D8DBD6 18.8%)");
+                this.root.style.setProperty("--background-chat", "url(../img/mine.jpg)");
+                this.root.style.setProperty("--ms-black", "#000");
+                this.root.style.setProperty("--ms-white", "#ffffff");
+                this.root.style.setProperty("--ms_bg-white", "#ffffff");
+                this.root.style.setProperty("--ms_bg-light-grey", "#eaeaea");
+            } else{
+                // dark-mode
+                this.root.style.setProperty("--ms_bg-app", "linear-gradient(180deg, #009688 18.8%, #000000e8 18.8%)");
+                this.root.style.setProperty("--background-chat", "url(../img/mine.jpg)");
+                this.root.style.setProperty("--ms-black", "#ffffff");
+                this.root.style.setProperty("--ms-white", "#000");
+                this.root.style.setProperty("--ms_bg-white", "#000");
+                this.root.style.setProperty("--ms_bg-light-grey", "#252525");
+            }
+        }
+    },
+    mounted(){
+        this.switchMode();
     }
 }).mount("#root");
