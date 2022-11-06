@@ -3,10 +3,12 @@
 // lang: js;
 
 const {createApp} = Vue;
+const dt = luxon.DateTime;
+
 createApp({
     data(){
         return{
-            dataForUsers: [
+            contacts: [
                 {
                     name: 'Jonny',
                     avatar: '_1',
@@ -187,10 +189,97 @@ createApp({
                             message: 'OK!',
                             status: 'received'
                         }
-                    ],
+                    ]
                 }
             ],
+            botMessage: [
+                "Hi mate... nice to se you",
+                "How are you?",
+                "Good job...",
+                "Try it",
+                "Bye",
+                "Hellooooooo",
+
+            ],
             currentChat: 0,
+            activeContactBot: 0,
+            userMessage: "",
+            chatStringFilter: "",
+            contactNotFound: false,
+            openPopup: false,
+            wrongData: false,
+            newContact: {
+                name: '',
+                avatar: '',
+                state: 'Last access: 12:00',
+                visible: true,
+                messages: []
+            },
+            darkTheme: true,
+            root: null,
         }
+    },
+
+    methods: {
+
+        newChat(){
+            this.wrongData = false;
+
+            if(this.newContact.name.length > 0 && this.newContact.avatar.length > 0){
+                this.contacts.push({...this.newContact});
+                this.openPopup = false;
+                this.$nextTick(() => {
+                    this.endSidebar();
+                });
+                this.currentChat = this.contacts.length - 1;
+
+            } else {
+                this.wrongData = true;
+            }
+
+            this.newContact.name = "";            
+            this.newContact.avatar = "";
+            this.newContact.messages = [];
+        },
+
+        closePopupAdd(){
+            this.openPopup = false;
+            this.newContact.name = "";            
+            this.newContact.avatar = "";
+            this.newContact.messages = [];
+        },
+
+        endSidebar(){
+            const container = document.querySelector('.main-sidebar-structure');
+            const scrollHeight = container.scrollHeight;
+            container.scrollTop = scrollHeight;
+        },
+
+        dataTimeGenerator(){
+            return dt.now().setLocale("it").toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
+        },
+
+        chatFilter(){
+            this.contactNotFound = false;
+
+            let count = 0;
+            const userSearch = this.chatStringFilter.toLowerCase();
+
+            for (let i = 0; i < this.contacts.length; i++) {
+                const thisContact = this.contacts[i].name.toLowerCase();
+                
+                if (thisContact.substring(0,userSearch.length) !== userSearch) {
+                    this.contacts[i].visible = false;
+                    count++;
+
+                } else{
+                    this.contacts[i].visible = true;
+                }
+
+                if(count === this.contacts.length){
+                    this.contactNotFound = true;
+                }
+            }
+        },
     }
 }).mount("#root");

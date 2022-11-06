@@ -4,73 +4,74 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- links-section -->
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- /css -->
 
-        <!-- css -->
-        <link rel="stylesheet" href="css/style.css">
-        <!-- /css -->
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- /vue -->
+    
+    <!-- luxon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- /luxon -->
 
-        <!-- vue -->
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <!-- /vue -->
-
-        <!-- luxon -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- /luxon -->
-
-        <!-- font-awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- /font-awesome -->
-
-    <!-- /links-section -->
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- /font-awesome -->
 
     <!-- title -->
     <title>Boolzap</title>
     <!-- /title -->
+
+    <!-- /links-section -->
+
 </head>
 
 <body>
-    
-    <!-- root -->
     <div id="root">
-
         <!-- container -->
         <div class="container">
 
-            <!-- sidebar -->
+            <!-- sidebar-section -->
             <div class="sidebar">
-
-                <!-- header-sidebar -->
                 <div class="header-sidebar">
 
-                    <!-- users-info -->
-                    <div class="users-info">
+                    <div class="user-info">
 
-                        <!-- users-descriptions-data -->
                         <div class="user">
                             <img src="img/avatar_1.jpg" alt="user photo">
                             <h2>Francesco Cimino</h2>
                         </div>
-                        <!-- users-descriptions-data -->
 
-                        <!-- icons-app -->
                         <ul class="icons">
-                            <li><i class="fa-solid fa-circle-notch"></i></li>
+                            <li @click="switchMode()">
+                                <div id="icon-switch-mode" :class="{'dark' : darkTheme}">
+                                    <div class="light-mode">
+                                        <i class="fa-solid fa-sun"></i>
+                                    </div>
+
+                                    <div class="dark-mode">
+                                        <i class="fa-solid fa-moon"></i>
+                                    </div>
+
+                                </div>
+                            </li>
+
                             <li><i class="fa-solid fa-message"></i></li>
                             <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
                         </ul>
-                        <!-- /icons-app -->
 
                     </div>
-                    <!-- users-info -->
+                    <!-- /user-info -->
 
-                    <!-- operations-for-notifications -->
+                    <!-- banner-section -->
                     <div class="bnr-notification">
 
                         <div class="icon">
@@ -83,59 +84,75 @@
                         </div>
 
                     </div>
-                    <!-- operations-for-notifications -->
 
-                    <!-- search-bar -->
+                    <!-- search-bar-section -->
                     <div class="search-bar">
+                        <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                         <label for="search-chat">Search or start a new chat</label>
-                        <input type="text" id="search-chat" placeholder="Search or start a new chat">
+                        <input type="text" id="search-chat" placeholder="Search or start a new chat" @keyup="chatFilter()" v-model.trim="chatStringFilter">
                     </div>
-                    <!-- search-bar -->
+                    <!-- search-bar-section -->
 
                 </div>
-                <!-- /header-sidebar -->
 
-                <!-- main-structure-for-sidebar -->
-                <div class="main-sidebar-structure ">
-                     
-                    <!-- users-chat-list -->
-                    <ul class="chat-list">
+                <div class="main-sidebar-structure">
+                    <ul class="users-chat-list">
 
                         <li 
                         class="chat-item" 
                         :class="{'active' : currentChat === index}" 
-                        v-for="(contact, index) in dataForUsers"
+                        v-for="(contact, index) in contacts"
                         @click="currentChat = index"
+                        v-show="contact.visible"
                         >
                             <div class="user-photo">
-                                <img :src="`img/avatar${contact.avatar}.jpg`" :alt="`photo of ${contact.name}`">
+                                <img 
+                                :src="`img/avatar${contact.avatar}.jpg`" 
+                                :alt="`photo ${contact.name}`">
                             </div>
 
                             <div class="info-chat">
                                 <h3>{{ contact.name }}</h3>
-                                <p>{{ contact.messages[contact.messages.length - 1].message }}</p>
-                                <p id="last-hour">{{ contact.messages[contact.messages.length - 1].date }}</p>
+                                <p v-if="contact.messages.length > 0" id="last-message">{{ contact.messages[contact.messages.length - 1].message }}</p>
+                                <p v-else>No recent messages</p>
+                                <p id="last-hour" v-if="contact.messages.length > 0">{{ contact.messages[contact.messages.length - 1].date }}</p>
                             </div>
-
                         </li>
-                        <!-- Chat Item -->
+
+                        <li v-if="contactNotFound" class="contact-not-found">
+                            <p>Contact not present</p>
+                        </li>
+
                     </ul>
-                    <!-- users-chat-list -->
-
                 </div>
-                <!-- main-structure-for-sidebar -->
 
+                <div class="sidebar-footer-section">
+
+                    <button id="add-chat" @click="openPopup = true">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                    <div id="popup-add" v-if="openPopup">
+                        <button class="close" @click="closePopupAdd()"><i class="fa-solid fa-xmark"></i></button>
+
+                        <label for="user-name-chat">Enter name</label>
+                        <input type="text" id="user-name-char" placeholder="Enter user name" v-model="newContact.name">
+
+                        <label for="icon-link">Enter avatar link</label>
+                        <input type="text" id="icon-link" placeholder="Enter avatar link" v-model="newContact.avatar" @keyup.enter="newChat()">
+                        
+                        <div class="wrong-data"><p v-if="wrongData">Not data found</p></div>
+
+                        <button class="add" @click="newChat()">Add new one</button>
+                    </div>
+                </div>
             </div>
-            <!-- /sidebar -->
-
-            <!-- chats-wrapper -->
-            <div class="chats-wrapper"></div>
-            <!-- chats-wrapper -->
+            <!-- sidebar-section -->
 
         </div>
         <!-- /container -->
+
     </div>
-    <!-- /root -->
 
     <!-- js -->
     <script src="js/script.js"></script>
