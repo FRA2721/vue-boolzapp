@@ -221,6 +221,82 @@ createApp({
     },
 
     methods: {
+        newUserMessage(){
+            this.activeContactBot = this.currentChat;
+            if(this.contacts.length > 0 && this.userMessage.length > 0){    
+                const newMessage = {
+                    date: this.dataTimeGenerator(),
+                    message: this.userMessage,
+                    status: 'sent'
+                };
+                this.contacts[this.activeContactBot].messages.push(newMessage);
+                this.userMessage = "";
+                this.$nextTick(() => {
+                    this.endScrolling();
+
+                });
+                this.newBotMessage();
+            }
+        },
+
+        newBotMessage(){
+            const rndMessage = this.botMessage[this.getRndNum(0,this.botMessage.length - 1)];
+            const botMessage = {
+
+                date: this.dataTimeGenerator(),
+                message: rndMessage,
+                status: 'received'
+            };
+
+            setTimeout(() => {
+                this.contacts[this.activeContactBot].state = "Is tipyng...";
+
+                setTimeout(() => {
+                    this.contacts[this.activeContactBot].messages.push(botMessage);
+                    this.$nextTick(() => {
+                        this.endScrolling();
+                    });
+                    this.contacts[this.activeContactBot].state = "Online";
+
+                    setTimeout(() => {
+                        nowDate = dt.now().setLocale("it").toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
+                        this.contacts[this.activeContactBot].state = `Last access: ${nowDate.substring(11,17)}`;
+                    }, 3000);
+
+                }, 3000);
+
+            }, 1000);
+
+        },
+
+        deleteMessage(index){
+            this.contacts[this.currentChat].messages.splice(index, 1);
+        },
+
+        getRndNum(min,max){
+            let rndNum =  Math.floor(Math.random() * (max - min + 1) ) + min;
+            return rndNum;
+        },
+
+        deleteAllMessage(){
+            if(this.contacts.length > 0){
+                if(this.contacts[this.currentChat].messages.length > 0){
+                    for(let i = this.contacts[this.currentChat].messages.length; i >= 0; i--){
+                        this.deleteMessage(i);
+                    }
+                }
+            }
+        },
+
+        deleteChat(){
+            if(this.currentChat === this.contacts.length - 1 && this.currentChat !== 0){
+                this.contacts.splice(this.currentChat, 1);
+                this.currentChat = this.contacts.length - 1;
+
+            } else{
+                this.contacts.splice(this.currentChat, 1);
+            }
+        },
 
         newChat(){
             this.wrongData = false;
@@ -247,6 +323,12 @@ createApp({
             this.newContact.name = "";            
             this.newContact.avatar = "";
             this.newContact.messages = [];
+        },
+
+        endScrolling(){
+            const container = document.querySelector('.main-chat');
+            const scrollHeight = container.scrollHeight;
+            container.scrollTop = scrollHeight;
         },
 
         endSidebar(){

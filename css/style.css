@@ -97,7 +97,7 @@ label{
     color: var(--ms-black);
     transition-duration: 1s;
     background-color: var(--ms-white);
-    box-shadow: 1px 2px 33px 3px rgba(0,0,0,0.50);
+    box-shadow: 1px 2px 33px 3px rgba(0,0,0,0.5);
 }
 
 #dropdown:hover{
@@ -174,6 +174,7 @@ label{
     display: flex;
     align-items: center;
 }
+
 
 .user-info .user img{
     object-fit: cover;
@@ -351,6 +352,12 @@ label{
     padding: .5em .7em;
     align-items: flex-start;
     border-bottom: 1px solid var(--ms_bg-light-grey);
+    transition-duration: 1s;
+}
+
+.chat-item:hover{
+    background-color: burlywood;
+    color: white;
 }
 
 .users-chat-list .chat-item:last-child{
@@ -373,15 +380,21 @@ label{
     width: calc(100% - var(--width-heigth-user-photo));
 }
 
+
 .info-chat h3{
     font-size: 1rem;
     margin-bottom: .2em;
     color: var(--ms-black);
 }
 
+
 .info-chat p{
     font-size: .8rem;
     color: var(--ms-grey);
+}
+
+.info-chat:hover p{
+    color: white;
 }
 
 #last-message{
@@ -409,7 +422,34 @@ label{
 
 
 
+/* footer-formatting-section */
+.footer-chat .user-message-input{
+    width: 80%;
+    height: 100%;
+}
 
+.user-message-input label{
+    display: none;
+}
+
+.user-message-input input{
+    width: 100%;
+    height: 100%;
+    padding: .2em;
+    border-style: none;
+    border-radius: 3px;
+    color: var(--ms-black);
+    background-color: var(--ms-white);
+}
+
+
+.footer-chat .icon{
+    width: 10%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--ms-grey);
+}
 
 #add-chat{
     width: 35px;
@@ -483,3 +523,135 @@ label{
     margin-bottom: 1em;
     text-align: center;
 }
+
+/* chat-wrapper-section */
+.wrapper-chat-section{
+    height: 100%;
+    width: var(--wrapper-chat-section-width);
+    border-left: 1px solid var(--ms_bg-light-grey);
+}
+
+.wrapper-chat-section .header-chat{
+    width: 100%;
+    display: flex;
+    padding: .5em 1em;
+    align-items: center;
+    height: var(--header-chat-height);
+    background-color: var(--ms_bg-light-grey);
+}
+
+.header-chat .user-info{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-chat .user-info img{
+    border-radius: 50%;
+    width: var(--width-heigth-user-photo);
+    height: var(--width-heigth-user-photo);
+}
+
+.user-info .user-description{
+    margin-left: .5em;
+}
+
+.user-info .user-description h3{
+    font-size: 1rem;
+    color: var(--ms-black);
+}
+
+.user-info .user-description p{
+    font-size: .9rem;
+    color: var(--ms-grey);
+}
+
+/* icons-formatting-section */
+.wrapper-chat-section .header-chat .icons{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-chat .icons li{
+    margin: .5em;
+    font-size: 1rem;
+    color: var(--ms-grey);
+}
+
+.settings-icon{
+    cursor: pointer;
+    position: relative;
+}
+
+.wrapper-chat-section .main-chat{
+    width: 100%;
+    padding: 1em 1em;
+    overflow-y: scroll;
+    background-image: var(--background-chat);
+    height: calc(100% - var(--header-chat-height) - var(--footer-chat-height));
+}
+
+.message-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.message-list .message-item{
+    max-width: 50%;
+    min-width: 100px;
+    padding: .8em .8em;
+    position: relative;
+    margin-bottom: 1em;
+    display: table-cell;
+    border-radius: 10px;
+}
+
+#message-time{
+    right: 4px;
+    bottom: 1px;
+    font-size: .6rem;
+    position: absolute;
+    color: var(--ms-grey);
+}
+
+#menu-message{
+    top: 3px;
+    right: 3px;
+    display: none;
+    cursor: pointer;
+    font-size: .8rem;
+    position: absolute;
+    color: var(--ms-grey);
+}
+
+#menu-message:hover #dropdown{
+    display: block;
+}
+
+.message-item.received{
+    margin-right: auto;
+    background-color: white;
+}
+
+.message-item.sent{
+    margin-left: auto;
+    background-color: var(--ms-light-green);
+}
+
+.message-item:hover #menu-message{
+    display: block;
+}
+
+
+.wrapper-chat-section .footer-chat{
+    width: 100%;
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--footer-chat-height);
+    background-color: var(--ms_bg-light-grey);
+}
+

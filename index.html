@@ -149,6 +149,92 @@
             </div>
             <!-- sidebar-section -->
 
+            <!-- chat-section -->
+            <div class="wrapper-chat-section">
+                <div class="header-chat">
+                    <div class="user-info">
+                        <img 
+                        v-if="contacts.length > 0"
+                        :src="`img/avatar${contacts[currentChat].avatar}.jpg`" 
+                        :alt="`Photo ${contacts[currentChat].name}`">
+
+                        <div class="user-description">
+                            <h3 v-if="contacts.length > 0">{{ contacts[currentChat].name }}</h3>
+                            <p v-if="contacts.length > 0">{{ contacts[currentChat].state}}</p>
+                        </div>
+
+                    </div>
+
+                    <ul class="icons">
+                        <li><i class="fa-solid fa-magnifying-glass"></i></li>
+                        <li><i class="fa-solid fa-paperclip"></i></li>
+                        <li class="settings-icon">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                            <ul id="dropdown">
+                                <li @click="deleteAllMessage()">Delete all message</li>
+                                <li @click="deleteChat()">Delete chat</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="main-chat">
+                    <ul class="message-list" v-if="contacts.length > 0">
+
+                        <li 
+                        class="message-item" 
+                        :class="chat.status"
+                        v-for="(chat, index) in contacts[currentChat].messages"
+                        v-if="contacts[currentChat].messages.length > 0"
+                        >
+                            <p>{{ chat.message }}</p>
+                            <span id="message-time">{{ chat.date.substring(10,16)}}</span>
+                            <div id="menu-message">
+                                <i class="fa-solid fa-chevron-down"></i>
+
+                                <ul id="dropdown">
+                                    <li @click="deleteMessage(index)">Delete Message</li>
+                                    <li>Info</li>
+                                </ul>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-chat">
+
+                    <div class="icon">
+                        <i class="fa-regular fa-face-smile"></i>
+                    </div>
+
+                    <div class="user-message-input">
+                        <label for="user-message">Write a new message...</label>
+                        <input 
+                        type="text" 
+                        id="user-message" 
+                        placeholder="Write a new message..." 
+                        v-model.trim="userMessage"
+                        @keyup.enter="newUserMessage"
+                        >
+                    </div>
+
+                    <div 
+                    class="icon"
+                    v-if="userMessage.length > 0"
+                    @click="newUserMessage">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+
+                    <div class="icon" v-else>
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- /chat-section -->
+
         </div>
         <!-- /container -->
 
